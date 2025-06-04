@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Survei Kepuasan Masyarakat | RSUD Tanjung Pura</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container mt-5 mb-5">
+  <!-- Banner Header RSUD -->
+  <div class="text-center p-4 mb-4" style="background-color: #198754; border-radius: 12px;">
+    <img src="rsud1.png" alt="Logo RSUD Tanjung Pura" class="logo-rsud mb-3">
+    <h2 class="text-white mb-2" style="font-size: 28px;"><strong>RSUD TANJUNG PURA</strong></h2>
+  </div>
+  <h2 class="text-center text-success mb-4" style="font-size: 29px;"><strong>Survei Kepuasan Pelayanan Inovasi SIKOM-DM</strong></h2>
+  <hr class="garis-pembatas">
+  <p id="teksPetunjuk" class="text-center mb-4"><strong>Bagaimana pendapat Anda tentang pelayanan kami hari ini?</strong></p>
+
+  <!-- FORM INDIKATOR KEPUASAN -->
+  <!-- Ganti bagian form kepuasan -->
+<div id="formKepuasan" class="text-center">
+  <div class="frame-informasi p-4 mb-3">
+    <button id="btnPuas" class="btn btn-success me-3 mb-2">
+      <i class="bi bi-hand-thumbs-up-fill"></i> Puas
+    </button>
+    <button id="btnTidakPuas" class="btn btn-danger mb-2">
+      <i class="bi bi-hand-thumbs-down-fill"></i> Tidak Puas
+    </button>
+  </div>
+</div>
+
+  <!-- Modal Hasil -->
+  <div class="modal fade" id="hasilModal" tabindex="-1" aria-labelledby="hasilModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="hasilModalLabel">Terima Kasih atas Penilaian Anda!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <p id="hasilKepuasan" style="font-size:20px;"></p>
+            <p class="text-secondary mt-3 mb-0">Masukan Anda sangat berarti bagi peningkatan layanan RSUD Tanjung Pura.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer mt-5">
+  <p>&copy; 2025 <strong>RSUD Tanjung Pura</strong>. Semua Hak Dilindungi.</p>
+  <div class="social-icons">
+    <a href="https://rsudtanjungpura.langkatkab.go.id/" target="_blank" aria-label="Website"><i class="bi bi-globe"></i></a>
+    <a href="https://facebook.com/rsudtanjungpura" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+    <a href="https://instagram.com/rsud.tanjungpura" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+    <a href="https://www.youtube.com/@rsudtanjungpura5274" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+    <a href="mailto:info@rsudtanjungpura.go.id" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const btnPuas = document.getElementById('btnPuas');
+const btnTidakPuas = document.getElementById('btnTidakPuas');
+const hasilKepuasan = document.getElementById('hasilKepuasan');
+
+btnPuas.onclick = function() {
+  hasilKepuasan.innerHTML = '<span class="text-success"><i class="bi bi-hand-thumbs-up-fill" style="font-size:2rem;"></i><br>Puas</span><br><span class="text-secondary" style="font-size:16px;">Terima kasih atas kepuasan Anda!</span>';
+  const modal = new bootstrap.Modal(document.getElementById('hasilModal'));
+  modal.show();
+  // Di sini bisa ditambah kode untuk menyimpan data ke server/google sheet jika diinginkan
+};
+
+btnTidakPuas.onclick = function() {
+  hasilKepuasan.innerHTML = '<span class="text-danger"><i class="bi bi-hand-thumbs-down-fill" style="font-size:2rem;"></i><br>Tidak Puas</span><br><span class="text-secondary" style="font-size:16px;">Mohon maaf atas ketidaknyamanannya, kami akan berusaha lebih baik.</span>';
+  const modal = new bootstrap.Modal(document.getElementById('hasilModal'));
+  modal.show();
+  // Di sini bisa ditambah kode untuk menyimpan data ke server/google sheet jika diinginkan
+};
+</script>
+</body>
+</html>
