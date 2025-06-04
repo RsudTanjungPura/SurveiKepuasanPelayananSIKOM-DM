@@ -21,17 +21,16 @@
   <p id="teksPetunjuk" class="text-center mb-4"><strong>Bagaimana pendapat Anda tentang pelayanan kami hari ini?</strong></p>
 
   <!-- FORM INDIKATOR KEPUASAN -->
-  <!-- Ganti bagian form kepuasan -->
-<div id="formKepuasan" class="text-center">
-  <div class="frame-informasi p-4 mb-3">
-    <button id="btnPuas" class="btn btn-success me-3 mb-2">
-      <i class="bi bi-hand-thumbs-up-fill"></i> Puas
-    </button>
-    <button id="btnTidakPuas" class="btn btn-danger mb-2">
-      <i class="bi bi-hand-thumbs-down-fill"></i> Tidak Puas
-    </button>
+  <div id="formKepuasan" class="text-center">
+    <div class="frame-informasi p-4 mb-3">
+      <button id="btnPuas" class="btn btn-success me-3 mb-2">
+        <i class="bi bi-hand-thumbs-up-fill"></i> Puas
+      </button>
+      <button id="btnTidakPuas" class="btn btn-danger mb-2">
+        <i class="bi bi-hand-thumbs-down-fill"></i> Tidak Puas
+      </button>
+    </div>
   </div>
-</div>
 
   <!-- Modal Hasil -->
   <div class="modal fade" id="hasilModal" tabindex="-1" aria-labelledby="hasilModalLabel" aria-hidden="true">
@@ -73,18 +72,30 @@ const btnPuas = document.getElementById('btnPuas');
 const btnTidakPuas = document.getElementById('btnTidakPuas');
 const hasilKepuasan = document.getElementById('hasilKepuasan');
 
+// Tambahkan fungsi kirim ke Google Sheet
+function kirimKepuasan(jenisKepuasan) {
+  fetch("https://script.google.com/macros/s/AKfycby5gBnbR6k7d57hS2GJZ6bHHqEVbPw1UfR5TV_25CKIDKlbavqCSFxNOB45PZY7UFZCTw/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kepuasan: jenisKepuasan })
+  })
+  .then(res => res.text())
+  .then(data => console.log("Google Sheets response:", data))
+  .catch(err => console.error("Google Sheets error:", err));
+}
+
 btnPuas.onclick = function() {
-  hasilKepuasan.innerHTML = '<span class="text-success"><i class="bi bi-hand-thumbs-up-fill" style="font-size:2rem;"></i><br>Puas</span><br><span class="text-secondary" style="font-size:16px;">Terima kasih atas kepuasan Anda!</span>';
+  hasilKepuasan.innerHTML = '<span class="text-success"><i class="bi bi-hand-thumbs-up-fill" style="font-size:2rem;"></i><br>Puas</span><br><span class="text-secondary" style="font-size:16px;">Terima kasih atas penilaian Anda!</span>';
+  kirimKepuasan("Puas");
   const modal = new bootstrap.Modal(document.getElementById('hasilModal'));
   modal.show();
-  // Di sini bisa ditambah kode untuk menyimpan data ke server/google sheet jika diinginkan
 };
 
 btnTidakPuas.onclick = function() {
-  hasilKepuasan.innerHTML = '<span class="text-danger"><i class="bi bi-hand-thumbs-down-fill" style="font-size:2rem;"></i><br>Tidak Puas</span><br><span class="text-secondary" style="font-size:16px;">Mohon maaf atas ketidaknyamanannya, kami akan berusaha lebih baik.</span>';
+  hasilKepuasan.innerHTML = '<span class="text-danger"><i class="bi bi-hand-thumbs-down-fill" style="font-size:2rem;"></i><br>Tidak Puas</span><br><span class="text-secondary" style="font-size:16px;">Terima kasih atas penilaian Anda!</span>';
+  kirimKepuasan("Tidak Puas");
   const modal = new bootstrap.Modal(document.getElementById('hasilModal'));
   modal.show();
-  // Di sini bisa ditambah kode untuk menyimpan data ke server/google sheet jika diinginkan
 };
 </script>
 </body>
