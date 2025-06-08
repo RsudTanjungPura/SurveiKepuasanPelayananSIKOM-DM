@@ -74,9 +74,9 @@ const hasilKepuasan = document.getElementById('hasilKepuasan');
 
 // Tambahkan fungsi kirim ke Google Sheet
 function kirimKepuasan(jenisKepuasan) {
-  fetch("https://script.google.com/macros/s/AKfycby0qkSqAw0e7VEWj3lOSt-cbJ1EH7NWnS9zOpu8WYKIQBgZbcGBjVLX45nYUGdjcROe/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyHCgXPCPCg7b0ZNmoqoAfK31gJGp1EHgahzDtu_kMSMCI6m_f3h1uMZ7-bpsoweWlPcg/exec", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/plain" },
     body: JSON.stringify({ kepuasan: jenisKepuasan })
   })
   .then(res => res.text())
